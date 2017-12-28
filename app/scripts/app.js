@@ -20,7 +20,7 @@
     }
     angular
         // dependencies are injected into the app by adding script source, then adding them to the array below
-        .module('pomodoro-2017', ['ui.router', 'firebase'])
+        .module('pomodoro-2017', ['ui.router', 'firebase', 'ngMaterial'])
         // makes sure the providers are accessible throughout the application
         .config(config);
 })();
