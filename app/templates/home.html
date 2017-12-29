@@ -1,7 +1,20 @@
 <div class="timer">
+
    <!-- Will display the amount of time remaining in the correct format defined in timecode.js -->
    <h1 class="md-display-3"> {{ home.clock | timecode }} </h1>
-   <!-- Defines the button styles based on the state it's in -->
-   <md-button class="md-raised" ng-show="!home.timerRunning" ng-click="home.startTimer()"> {{ home.buttonMsg }} </md-button>
-   <md-button class="md-raised" ng-show="home.timerRunning" ng-click="home.resetTimer()"> {{ home.buttonMsg }} </md-button>
+
+  <!-- Defines the button styles based on the state it's in -->
+
+   <!-- When timer is not running AND user is not on break (Start Timer / Start a new session) -->
+   <md-button class="md-raised" ng-show="!home.timerRunning && !home.onBreak" ng-click="home.startWorkTimer()"> {{ home.buttonMsg }} </md-button>
+
+   <!-- When timer is running AND user is not on break (Reset Timer) -->
+   <md-button class="md-raised" ng-show="home.timerRunning && !home.onBreak" ng-click="home.resetWorkTimer()"> {{ home.buttonMsg }} </md-button>
+
+   <!-- When timer is not running AND user is on break (Start Break) -->
+   <md-button class="md-raised" ng-show="!home.timerRunning && home.onBreak" ng-click="home.startBreakTimer()"> {{ home.buttonMsg }} </md-button>
+
+   <!-- When timer is running AND user is on break (Reset Break) -->
+   <md-button class="md-raised" ng-show="home.timerRunning && home.onBreak" ng-click="home.resetBreakTimer()"> {{ home.buttonMsg }} </md-button>
+
 </div>
