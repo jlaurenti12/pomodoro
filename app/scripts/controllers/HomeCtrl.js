@@ -5,6 +5,8 @@
 
       this.clock = 10;
 
+      this.sessions = 0;
+
       this.timer = null;
 
       this.buttonMsg = "Start Timer";
@@ -18,16 +20,25 @@
       this.startWorkTimer = function() {
           this.timerRunning = true;
           this.buttonMsg = "Reset Timer";
-          this.clock = 9;
+          this.clock -= 1;
           this.timer = $interval(function () {
               this.clock -= 1;
+
               if (this.clock === 0) {
                 $interval.cancel(this.timer);
                 this.timerRunning = false;
                 this.onBreak = true;
-                this.buttonMsg = "Take a Break - You Earned it!";
-                this.clock = 5;
+                  if (this.sessions == 3) {
+                    this.buttonMsg = "4 in a row - enjoy your longer break :)";
+                    this.clock = 6;
+                    this.sessions = 0;
+                  } else {
+                    this.buttonMsg = "Start your break!";
+                    this.clock = 5;
+                    this.sessions ++;
+                  }
               }
+
           }.bind(this), 1000);
       }
 
@@ -46,7 +57,7 @@
 
       this.startBreakTimer = function() {
           this.timerRunning = true;
-          this.clock = 4;
+          this.clock -= 1;
           this.buttonMsg = "Reset Break";
           this.timer = $interval(function () {
               this.clock -= 1;
