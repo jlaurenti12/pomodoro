@@ -3,7 +3,7 @@
 
   // Default timer status and button state when the page is loaded
 
-      this.clock = 10;
+      this.clock = 1500;
 
       this.sessions = 0;
 
@@ -23,22 +23,19 @@
           this.clock -= 1;
           this.timer = $interval(function () {
               this.clock -= 1;
-
               if (this.clock === 0) {
                 $interval.cancel(this.timer);
                 this.timerRunning = false;
                 this.onBreak = true;
-                  if (this.sessions == 3) {
+                this.sessions ++;
+                  if (this.sessions == 4) {
                     this.buttonMsg = "4 in a row - enjoy your longer break :)";
-                    this.clock = 6;
-                    this.sessions = 0;
+                    this.clock = 1800;
                   } else {
                     this.buttonMsg = "Start your break!";
-                    this.clock = 5;
-                    this.sessions ++;
+                    this.clock = 300;
                   }
               }
-
           }.bind(this), 1000);
       }
 
@@ -47,7 +44,7 @@
       this.resetWorkTimer = function() {
           if (angular.isDefined(this.timer)) {
                  $interval.cancel(this.timer);
-                 this.clock = 10;
+                 this.clock = 1500;
                  this.timerRunning = false;
                  this.buttonMsg = 'Start Timer'
           }
@@ -66,7 +63,8 @@
                  this.timerRunning = false;
                  this.onBreak = false;
                  this.buttonMsg = "Start a New Session!"
-                 this.clock = 10;
+                 this.clock = 1500;
+                 this.sessions == 4 ? this.sessions = 0 : this.sessions
               }
           }.bind(this), 1000);
        }
@@ -76,9 +74,9 @@
       this.resetBreakTimer = function() {
           if (angular.isDefined(this.timer)) {
               $interval.cancel(this.timer);
-              this.clock = 5;
               this.timerRunning = false;
               this.buttonMsg = 'Start Break'
+              this.sessions == 4 ? this.clock = 1800 : this.clock = 300
           }
        }
 
