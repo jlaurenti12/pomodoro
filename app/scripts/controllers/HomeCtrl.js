@@ -1,5 +1,14 @@
 (function() {
-    function HomeCtrl($scope, $firebaseArray, $interval, TIMES) {
+    function HomeCtrl(Task, $scope, $firebaseArray, $interval, TIMES) {
+
+    var ref = firebase.database().ref().child("tasks");
+
+      $scope.tasks = $firebaseArray(ref);
+
+      this.addTask = function() {
+        Task.add(this.newTask);
+        this.newTask.$value = null;
+      };
 
   // Default timer status and button state when the page is loaded
 
@@ -14,6 +23,18 @@
       this.timerRunning = false;
 
       this.onBreak = false;
+
+      $scope.tasks = $firebaseArray(ref);
+
+               $scope.addTask = function() {
+                    $scope.tasks.$add({
+                        text: $scope.newText
+                    });
+
+                    if($scope.tasks.$add) {
+                       alert("Message Saved");
+                   }
+                };
 
   // Declaring variable and tying it to the appropriate mp3 file using Buzz
 
@@ -100,5 +121,5 @@
         .module('pomodoro-2017')
         // inject as many dependencies as our controller in the array below
         // last item in the array must be the callback function that executes when the controller is initialized
-        .controller('HomeCtrl', ['$scope', '$firebaseArray', '$interval', 'TIMES', HomeCtrl]);
+        .controller('HomeCtrl', ['Task', '$scope', '$firebaseArray', '$interval', 'TIMES', HomeCtrl]);
 })();
