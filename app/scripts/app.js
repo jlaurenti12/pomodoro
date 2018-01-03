@@ -21,6 +21,12 @@
     angular
         // dependencies are injected into the app by adding script source, then adding them to the array below
         .module('pomodoro-2017', ['ui.router', 'firebase', 'ngMaterial'])
+        // constant values that can be used in other parts of the app that include TIMES
+        .constant('TIMES', {
+         'WORK_SESSION': 1500,
+         'SHORT_BREAK': 300,
+         'LONG_BREAK': 1800
+        })
         // makes sure the providers are accessible throughout the application
         .config(config);
 })();
