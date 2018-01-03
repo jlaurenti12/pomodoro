@@ -4,18 +4,88 @@
 
 #content {
     text-align: center;
+    padding-top: 20px;
+}
+
+.md-toolbar-tools {
+  height: 50px;
 }
 
 .x {
-    color: white;
+    color: red;
     text-decoration: none;
 }
 
+form {
+  vertical-align: middle;
+}
+
 #sidebar {
-    color: white;
-    background-color: rgb(63,81,181);
-    position:absolute;
-    top:0;
-    left: 0;
-    bottom:0
+    color: rgb(63,81,181);
+    background-color: white ;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom:0;
+}
+
+.task-form {
+  position: relative;
+  padding: 0px 15px 10px 15px;
+  min-width: 250px;
+  margin: 0;
+}
+
+.md-button.md-small {
+  width: 30px;
+  height: 30px;
+  line-height: 20px;
+  text-align: center;
+  min-height: 20px;
+  font-size: 14px;
+  margin-left: 0px;
+}
+
+.docs-navbar-header {
+  background-color: #3f51b5;
+}
+
+app-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  color: hsla(0,0%,100%,.87);
+  box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
+}
+
+
+.mat-button {
+  box-sizing: border-box;
+  position: relative;
+  cursor: pointer;
+  outline: 0;
+  border: none;
+  display: inline-block;
+  white-space: nowrap;
+  text-decoration: none;
+  vertical-align: baseline;
+  text-align: center;
+  -webkit-tap-highlight-color: transparent;
+  margin: 0;
+  min-width: 88px;
+  line-height: 28px;
+  padding: 10px 14px;
+  border-radius: 2px;
+  font-family: Roboto,Helvetica Neue,sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: currentColor;
+  height: 50px;
+}
+
+.task-dropdown {
+  text-align: left;
+  max-width: 200px;
 }

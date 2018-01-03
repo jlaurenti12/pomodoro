@@ -26,15 +26,11 @@
 
       $scope.tasks = $firebaseArray(ref);
 
-               $scope.addTask = function() {
-                    $scope.tasks.$add({
-                        text: $scope.newText
-                    });
-
-                    if($scope.tasks.$add) {
-                       alert("Message Saved");
-                   }
-                };
+      $scope.addTask = function() {
+        $scope.tasks.$add({
+          text: $scope.newText
+      });
+    };
 
   // Declaring variable and tying it to the appropriate mp3 file using Buzz
 

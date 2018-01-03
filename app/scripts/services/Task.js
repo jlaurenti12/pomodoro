@@ -7,8 +7,10 @@
     // download tasks into a synchronized array
     var tasks = $firebaseArray(ref);
 
+    // sets tasks equal to all the tasks in the array
     Task.all = tasks;
 
+    // function for adding tasks to the array
     Task.add = function(task) {
       tasks.$add(task);
     };
