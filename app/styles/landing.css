@@ -1,0 +1,29 @@
+.hero-image {
+  text-align: center;
+  padding-top: 75px;
+  padding-bottom: 50px;
+}
+
+.selling-points {
+  text-align: center;
+  color: #E25B64;
+}
+
+.point {
+    position: relative;
+    display: inline-block;
+    width: 30%;
+    text-align: center;
+
+}
+
+.point .point-title {
+    font-size: 1.25rem;
+}
+
+.ion-music-note,
+.ion-radio-waves,
+.ion-iphone {
+    color: rgb(233,50,117);
+    font-size: 5rem;
+}

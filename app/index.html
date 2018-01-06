@@ -6,28 +6,24 @@
     <!-- Angular Material style sheet -->
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
     <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" href="/styles/landing.css">
 </head>
 <body>
 
-<!-- Commenting out idea for header
 
   <app-navbar>
     <nav class="docs-navbar-header">
-      <a class="mat-button" tabindex="0" aria-disabled="false" ui-sref="home">
-        <span class="mat-button-wrapper">Logo</span>
+      <a class="mat-button" tabindex="0" aria-disabled="false" ui-sref="landing">
+        <img src="/assets/images/tomato.png" class="logo">
       </a>
-      <a class="mat-button" tabindex="0" aria-disabled="false" ui-sref="timer">
+      <a class="mat-button" tabindex="0" aria-disabled="false" ui-sref="time">
         <span class="mat-button-wrapper">Timer</span>
-      </a>
-      <a class="mat-button" tabindex="0" aria-disabled="false" ui-sref="task">
-        <span class="mat-button-wrapper">Tasks</span>
       </a>
       <a class="mat-button" tabindex="0" aria-disabled="false" ui-sref="metrics">
         <span class="mat-button-wrapper">Metrics</span>
       </a>
     </nav>
   </app-navbar>
--->
 
     <!-- directive (with the help UI-Router) tells Angular where to place the templates when they're requested -->
     <ui-view></ui-view>
@@ -68,7 +64,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/buzz/1.2.0/buzz.min.js"></script>
     <!-- Application Files -->
     <script src="/scripts/app.js"></script>
-    <script src="/scripts/controllers/HomeCtrl.js"></script>
+    <script src="/scripts/controllers/TimeCtrl.js"></script>
+    <script src="/scripts/controllers/RightCtrl.js"></script>
    <script src="/scripts/filters/timecode.js"></script>
    <script src="/scripts/services/Task.js"></script>
 </body>

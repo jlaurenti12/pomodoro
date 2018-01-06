@@ -11,11 +11,16 @@
       // configure the state behavior
       $stateProvider
         // state name
-        .state('home', {
-          url: '/',
+        .state('time', {
+          url: '/time',
           // controller paired to the state using 'controller as' syntax
-          controller: 'HomeCtrl as home',
-          templateUrl: '/templates/home.html'
+          controller: 'TimeCtrl as time',
+          templateUrl: '/templates/time.html'
+        })
+
+        .state('landing', {
+          url: '/',
+          templateUrl: '/templates/landing.html'
         });
     }
     angular

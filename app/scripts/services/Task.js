@@ -15,6 +15,10 @@
       tasks.$add(task);
     };
 
+    Task.complete = function(task) {
+      task.$remove(task);
+    };
+
     return Task;
   }
 

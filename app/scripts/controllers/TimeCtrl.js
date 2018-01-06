@@ -1,5 +1,5 @@
 (function() {
-    function HomeCtrl(Task, $scope, $firebaseArray, $interval, TIMES) {
+    function TimeCtrl(Task, $scope, $firebaseArray, $interval, $mdSidenav, $mdUtil, TIMES) {
 
     var ref = firebase.database().ref().child("tasks");
 
@@ -10,19 +10,38 @@
         this.newTask.$value = null;
       };
 
+      this.completeTask = function(task) {
+        Task.$remove(task);
+      };
+
+      $scope.toggleRight = buildToggler('right');
+      function buildToggler(navID) {
+        var debounceFn =  $mdUtil.debounce(function(){
+           $mdSidenav(navID)
+             .toggle()
+             .then(function () {
+               $log.debug("toggle " + navID + " is done");
+             });
+           },200);
+
+      return debounceFn;
+    }
+
   // Default timer status and button state when the page is loaded
 
       this.clock = TIMES.WORK_SESSION;
+
+      this.paused = false;
 
       this.sessions = 0;
 
       this.timer = null;
 
-      this.buttonMsg = "Start Timer";
+      this.buttonMsg = "Start Work Session";
 
       this.timerRunning = false;
 
-      this.onBreak = false;
+      this.onBreak =  false;
 
       $scope.tasks = $firebaseArray(ref);
 
@@ -40,7 +59,7 @@
 
   // $scope.$watch listens to the clock and when it's value becomes 0 plays the mySound sound
 
-         $scope.$watch('home.clock', function(newValue, oldValue){
+         $scope.$watch('time.clock', function(newValue, oldValue){
              newValue === 0 ? mySound.play() : this.clock
          });
 
@@ -48,7 +67,7 @@
 
       this.startWorkTimer = function() {
           this.timerRunning = true;
-          this.buttonMsg = "Reset Timer";
+          this.buttonMsg = "Reset Work Session";
           this.clock -= 1;
           this.timer = $interval(function () {
               this.clock -= 1;
@@ -75,7 +94,7 @@
                  $interval.cancel(this.timer);
                  this.clock = TIMES.WORK_SESSION;
                  this.timerRunning = false;
-                 this.buttonMsg = 'Start Timer'
+                 this.buttonMsg = 'Start Work Session'
           }
       }
 
@@ -109,6 +128,18 @@
           }
        }
 
+   // Pause and resume functionality
+
+      this.pauseTimer = function() {
+        $interval.cancel(this.timer);
+        this.clock = this.clock;
+        this.paused = true;
+      }
+
+      this.resumeTimer = function() {
+        this.onBreak == true ? this.startBreakTimer() : this.startWorkTimer()
+        this.paused = false;
+      }
 
     }
 
@@ -117,5 +148,5 @@
         .module('pomodoro-2017')
         // inject as many dependencies as our controller in the array below
         // last item in the array must be the callback function that executes when the controller is initialized
-        .controller('HomeCtrl', ['Task', '$scope', '$firebaseArray', '$interval', 'TIMES', HomeCtrl]);
+        .controller('TimeCtrl', ['Task', '$scope', '$firebaseArray', '$interval', '$mdSidenav', '$mdUtil', 'TIMES', TimeCtrl]);
 })();

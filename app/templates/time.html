@@ -1,0 +1,60 @@
+<!-- Timer section of page -->
+  <div class="timer-area">
+
+     <!-- Will display the amount of time remaining in the correct format defined in timecode.js -->
+     <div ng-show="!time.onBreak" class="work-circle">
+       <h2 class="md-display-3"> {{ time.clock | timecode }} </h2>
+       <img src="/assets/images/Pause.svg" class="play-pause" ng-show="!time.paused && time.timerRunning && time.clock > 0" ng-click="time.pauseTimer()">
+       <img src="/assets/images/Play.svg" class="play-pause" ng-show="time.paused" ng-click="time.resumeTimer()">
+     </div>
+
+     <div ng-show="time.onBreak" class="break-circle">
+       <h2 class="md-display-3"> {{ time.clock | timecode }} </h2>
+       <img src="/assets/images/PauseBreak.svg" class="play-pause" ng-show="!time.paused && time.timerRunning && time.clock > 0" ng-click="time.pauseTimer()">
+       <img src="/assets/images/PlayBreak.svg" class="play-pause" ng-show="time.paused" ng-click="time.resumeTimer()">
+     </div>
+
+     <div class="button-area">
+
+     <!-- Defines the button styles based on the state it's in -->
+
+       <!-- When timer is not running AND user is not on break (Start Timer / Start a new session) -->
+       <md-button class="md-raised startWork" ng-show="!time.timerRunning && !time.onBreak" ng-click="time.startWorkTimer()"> {{ time.buttonMsg }} </md-button>
+
+       <!-- When timer is running AND user is not on break (Reset Timer) -->
+       <md-button class="md-raised resetWork" ng-show="time.timerRunning && !time.onBreak" ng-click="time.resetWorkTimer()"> {{ time.buttonMsg }} </md-button>
+
+       <!-- When timer is not running AND user is on break (Start Break) -->
+       <md-button class="md-raised startBreak" ng-show="!time.timerRunning && time.onBreak" ng-click="time.startBreakTimer()"> {{ time.buttonMsg }} </md-button>
+
+       <!-- When timer is running AND user is on break (Reset Break) -->
+       <md-button class="md-raised resetBreak" ng-show="time.timerRunning && time.onBreak" ng-click="time.resetBreakTimer()"> {{ time.buttonMsg }} </md-button>
+     </div>
+
+  </div>
+
+  <!-- Sidebar for viewing and adding tasks -->
+
+
+  <!-- Task button to access sidebar -->
+  <button ng-click="toggleRight()" class="toggle">
+    <p> <img src="/assets/images/Triangle.png" class="triangle"> Tasks </p>
+  </button>
+
+  <!-- Sidebar view -->
+  <md-sidenav id="sidebar" class="md-sidenav-right" md-component-id="right">
+    <h1 class="md-toolbar-tools">My Tasks</h1>
+      <form ng-submit="time.addTask()">
+        <md-input-container class="task-form" md-no-float>
+          <input placeholder="Add new task" type="text" ng-model="time.newTask.$value">
+          <md-button class="md-raised md-small" type="submit">Add Task</md-button>
+        </md-input-container>
+      </form>
+      <ul class="tasks">
+        <div class="task-wrapper">
+          <li class="task-item" ng-repeat="task in tasks | orderBy:'timestamp':'reverse'">
+            <input type="checkbox" ng-click="tasks.$remove(task)"> {{ task.$value }}
+          </li>
+        </div>
+      </ul>
+  </md-sidenav>
